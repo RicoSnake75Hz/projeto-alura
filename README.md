@@ -1,85 +1,21 @@
-let amigos = new Set();
+Descrição do Código:
+Este código implementa um sorteio de Amigo Secreto, onde os usuários podem adicionar nomes, sortear um amigo e visualizar o resultado.
 
+Principais Funcionalidades:
+O usuário digita um nome e o adiciona à lista.
+Nomes duplicados são bloqueados para evitar repetições.
+O sorteio escolhe um nome aleatório e o exibe na tela.
+Os usuários podem remover nomes se necessário.
 
-// Evento para adicionar um amigo usando a tecla enter
-document.getElementById("amigo").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {  
-        event.preventDefault();
-        adicionarAmigo();
-    }
-});
+🔥 Diferencial: Função do Botão "Enter"
+Um dos destaques do código é a inclusão da função do botão "Enter", que melhora a experiência do usuário.
 
+✅ Como funciona?
+Agora, em vez de precisar clicar no botão "Adicionar", o usuário pode simplesmente pressionar "Enter" no teclado ao digitar um nome. Isso torna a interação mais fluida e rápida.
 
-/**
- * Adiciona um novo amigo na lista
- */
-function adicionarAmigo() {
-    const input = document.getElementById("amigo");
-    const nome = input.value.trim();
+✅ Por que isso é importante?
 
-    if (!nome) {
-        alert("⚠️ O atenção esse campo não pode estar vazio!");
-        return;
-    }
-
-    if (amigos.has(nome)) {
-        alert("🔁 Esse amigo já está na lista!");
-        return;
-    }
-
-    amigos.add(nome);
-    input.value = ""; // Limpa o campo após adicionar
-    atualizarLista();
-}
-
-/**
- * Atualiza a exibição da lista de amigos na tela
- */
-function atualizarLista() {
-    const lista = document.getElementById("listaAmigos");
-    lista.innerHTML = "";
-
-    
-    Array.from(amigos).forEach((amigo) => {
-        const li = document.createElement("li");
-        li.textContent = amigo;
-
-        const btnRemover = document.createElement("button");
-        btnRemover.textContent = "🚮";
-        btnRemover.classList.add("remove-button");
-
-        // Adiciona evento para remover amigo
-        btnRemover.onclick = () => removerAmigo(amigo);
-
-        li.appendChild(btnRemover);
-        lista.appendChild(li);
-    });
-}
-
-/**
- * Remove o amigo da lista
- */
-function removerAmigo(nome) {
-    amigos.delete(nome);
-    atualizarLista();
-}
-
-/**
- * Realiza o sorteio de um amigo secreto
- */
-function sortearAmigo() {
-    if (amigos.size === 0) {
-        alert(`🚨 Alerta de Solidão Extrema 🚨
-        Parece que sua lista de amigos está mais vazia que a geladeira de universitário no fim do mês. 🥲
-        Adicione pelo menos um amigo para poder sortear.
-        Se precisar, podemos abrir uma vaquinha para comprar você um amigo. 😂`);
-        return; // Impede que o sorteio continue caso a lista esteja vazia, e exibe essa mensagem.
-    }
-
-    const amigosArray = Array.from(amigos); // Converte Set 
-    const sorteadoIndex = Math.floor(Math.random() * amigosArray.length);
-    const sorteado = amigosArray[sorteadoIndex];
-
-    const resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<li>🫂 O amigo secreto é: <strong>${sorteado}</strong> 🎁</li>`;
-}
+Facilita a inserção de nomes sem precisar usar o mouse.
+Melhora a acessibilidade, especialmente para quem usa apenas o teclado.
+Deixa o sorteio mais dinâmico e agradável de usar.
+Essa pequena melhoria faz uma grande diferença na usabilidade do sorteio!
